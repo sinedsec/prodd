@@ -1,0 +1,14 @@
+rate limit baypass
+
+Add header/s with request
+X-Originating-IP: IP
+X-Forwarded-For: IP
+X-Remote-IP: IP
+X-Remote-Addr: IP
+X-Client-IP: IP
+X-Host: IP
+X-Forwared-Host: IP
+1.Race Condition --> Increase the treads --> Sending more requests in small time (Turbo Intruder)
+2. IP Rotation --> Sending new ip's (burpFakeIp github)
+3. Null byte -- %00,%0d%0a,%09
+exapmple:email:test5119@yopmail.com%00

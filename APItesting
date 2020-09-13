@@ -1,0 +1,61 @@
+api testing
+
+
+1.Try translating the POST request, for example, for authentication into JSON or XML forma  ( not to forget about Content-type, many web applications will not want to parse XML without it!)
+2.нашел /v3/api/ попрбоавать /v1/api
+3.пробовать менять http метод , если получил
+4.Wrap the ID with an array.
+Instead of {“id”:111} send {“id”:[111]}
+Wrap the ID with a JSON object
+Instead of {“id”:111} send {“id”:{“id”:111}}
+Try to perform HTTP parameter pollution:
+/api/get_profile?user_id=<legit_id>&user_id=<victim’s_id>
+OR
+/api/get_profile?user_id=<victim’s_id>&user_id=<user_id>
+This can work in situations where the component that performs the authorization check and the endpoint itself use different libraries to parse query parameters. In some cases, library #1 would take the first occurence of “user_id” while library #2 would take the second.
+Try to perform JSON parameter pollution
+POST api/get_profile
+{“user_id”:<legit_id>,”user_id”:<victim’s_id>}
+OR
+POST api/get_profile
+{“user_id”:<victim’s_id>,”user_id”:<legit_id>}
+It’s pretty similar to HTTP parameter pollution.
+5.ID in URL? Move it to the request body
+● ID in request body? Move it to the URL
+● ID is a GUID? Send numeric as well
+● IDs in the body tend to be more vulnerable
+6.пробовать метод option может вызвать документацию по запихнуть
+7.отсылать неправильный контент тайп можно вызвать ошибку с сенсетив инфой
+8.
+
+
+
+
+что почитать изучить новго про апи
+
+First, let’s look at the APIs Documentations●API Documentation Made Easy Security Testing●Security Review of APIs Documentations●Understanding API-Based PlatformsGetting Started with API Security Testing●Setup API Live Test Case Environment●API Penetration Testing Methodologies●API Security testing Checklists for Pentesters●API Security testing Checklists for Developers●API Security testing Checklists for Bug Hunters●API Security testing according to API governanceMobileApp and WebApp APIs Security Testing●Complete Security testing of Web API Applications●Complete Security testing of Mobile API Applications●Covering Security Audit of MobileApp API and WebApp APIDiscovering Leaky APIs | Hidden APIs - Reconnaissance●Configure Fiddler to find Sensitive and leaky APIs●Configure Burpsuite to Security test of Hidden APIs●Proxying Device Traffic Through Fiddler | Burpsuite●Discovering More About Mobile Apps via Fiddler●Discovering Hidden APIs via Documentation Pages●Discovering Hidden APIs via Search Engine●Discovering Hidden APIs via robots.txt
+●Discovering Leaky APIs - UserID Endpoint●Discovering Leaky APIs - User Input Endpoint●Discovering Leaky APIs - User Interaction Endpoint●Personally Identifiable Information (PII) DisclosureAPI Authentication and Authorization Vulnerabilities●A Practical Approach to Test: Various OAuth Misconfiguration●A Practical Approach to Test: OAuth Authorization Bypass●A Practical Approach to Test: Account takeover Issues●Improper Restriction of Unprotected APIs Endpoint●Transporting API Auth tokens as Cleartext Allowed●Improper Restriction of Misconfigured API●Insufficient Entropy For Random Values●Leakage of API Authentication Tokens●Improper Access ControlAPI Manipulation and Parameter Tampering●A Practical Approach to Test: XML External Entity (XXE) Processing●A Practical Approach to Test: HTTP Parameter Pollution Attacks●A Practical Approach to Test: Cross-site Scripting (XSS)●A Practical Approach to Test: Common Injection Attacks●A Practical Approach to Test: Command Injection●A Practical Approach to Test: SQL injection●Manipulating App Logic by Request Tampering●Response TamperingAPI Security Top 10 according to OWASP●OWASP API Security Vulnerabilities - Practicals●Testing for Broken Function Level Authorization●Testing for Broken Object Level Authorization●Testing for Lack of Resources & Rate Limiting●Testing for Broken User Authentication●Testing for Improper Assets Management●Testing for Security Misconfiguration●Testing for Excessive Data Exposure●Testing for Mass Assignment
+Modern APIs Vulnerabilities and Bug Bounty - Introduction●Why APIs Security Testing Important in Bug Bounty Hunting●Why APIs Security Testing Important in WebApp Security Auditing●Why APIs Security Testing Important in MobileApp Security AuditingModern APIs Vulnerabilities and Bug Bounty - Practicals●A Practical Approach to Test: Insecure Direct Object Reference(IDOR)●A Practical Approach to Test: Cross-Origin Resource Sharing (CORS)●A Practical Approach to Test: Cross-Site Request Forgery (CSRF)●A Practical Approach to Test: Open Redirection Vulnerability●A Practical Approach to Test: Privilege escalation Issues●A Practical Approach to Test: Local File Inclusion (LFI)●A Practical Approach to Test: Remote File Inclusion(RFI)●A Practical Approach to Test: Input validation Issue
+API1: Broken Object Level Authorization
+API2: Broken Authentication
+API3: Excessive Data Exposure
+API4: Lack of Resources & Rate Limiting
+API5: Broken Function Level Authorization
+API6: Mass Assignment
+API7: Security Misconfiguration
+API8: Injection
+API9: Improper Assets Management
+API10: Insufficient Logging & Monitoring
+
+
+
+
+
+
+
+fuzzing api
+1.When you are fuzzing API Endpoints worth you add XMLHttpRequest headers, some frameworks filter requests that don't was called by Frontend Applications.
+
+ - "X-requested-with: XMLHttpRequest"
+
+ 2.
